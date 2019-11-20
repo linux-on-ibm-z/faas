@@ -16,6 +16,10 @@ elif [ "$arch" = "aarch64" ] ; then
    arch="arm64"
    dockerfile="Dockerfile"
    eTAG="latest-arm64-dev"
+elif [ "$arch" = "s390x" ] ; then
+   arch="s390x"
+   dockerfile="Dockerfile.s390x"
+   eTAG="latest-s390x-dev"
 fi
 
 # $arch has been mutated by this point, so check for the updated values
@@ -26,6 +30,8 @@ if [ "$1" ] ; then
     eTAG="$1-armhf"
   elif [ "$arch" = "arm64" ] ; then
     eTAG="$1-arm64"
+  elif [ "$arch" = "s390x" ] ; then
+    eTAG="$1-s390x"
   fi
 fi
 

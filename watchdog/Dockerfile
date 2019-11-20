@@ -34,7 +34,11 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-s -w \
         -X main.GitCommit=$GIT_COMMIT \
         -X main.Version=$VERSION" \ 
         -installsuffix cgo -o watchdog-arm64 . \
-    && GOOS=windows CGO_ENABLED=0 go build -a -ldflags "-s -w \
+    && GOARCH=s390x CGO_ENABLED=0 GOOS=linux go build -a -ldflags "-s -w \ 
+        -X main.GitCommit=$GIT_COMMIT \
+        -X main.Version=$VERSION" \ 
+        -installsuffix cgo -o watchdog-s390x . \
+    && GOARCH=amd64 GOOS=windows CGO_ENABLED=0 go build -a -ldflags "-s -w \
         -X main.GitCommit=$GIT_COMMIT \
         -X main.Version=$VERSION" \ 
         -installsuffix cgo -o watchdog.exe .
